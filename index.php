@@ -22,6 +22,9 @@ spl_autoload_register(function($class) {
     return (($file = _file_exists($class)) !== false ? require_once $file : false);
 });
 
+//Uncomment to enable Composer autoload
+//include ROOT.'php/vendor/autoload.php';
+
 //Mount the Q static dock
 class_alias('Lib\Q', 'Q');
 Q::mount();
