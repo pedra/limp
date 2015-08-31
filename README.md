@@ -11,7 +11,7 @@ Type in a terminal in the folder of your PHP project (Linux, Windows or Mac):
 
     Composer create-project neos/plim ./ dev-master
 
-*Required: [Composer](https://getcomposer.org/download/) & [Git](http://git-scm.com/book/en/Getting-Started-Installing-Git).*
+Required: [Composer](https://getcomposer.org/download/) & [Git](http://git-scm.com/book/en/Getting-Started-Installing-Git).
 
 ## License
 
