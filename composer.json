@@ -1,19 +1,10 @@
 {
-<<<<<<< HEAD
-    "name": "neos/start-skel",
-    "type": "framework",
-    "description": "Skeleton for Starter PHP web projetcts.",
-    "keywords": ["framework", "starter", "simple"],
-    "homepage": "http://phpstart.tk",
-    "license": "MIT",
-=======
     "name": "neos/plim",
     "type": "framework",
     "description": "Minimal PHP starter.",
     "keywords": ["framework", "starter", "simple"],
     "homepage": "https://github.com/pedra/plim/wiki",
     "license": "CC0",
->>>>>>> origin/master
     "authors": [{
         "name": "Bill Rocha",
         "email": "prbr@ymail.com"
@@ -26,14 +17,7 @@
         "exclude": ["/doc", "/*.json", "/.git", "/*.md"]
     },
     "require": {
-<<<<<<< HEAD
-        "php": ">=5.4.0",
-        "neos/start": "dev-master",
-        "neos/data": "dev-master",
-        "neos/html": "dev-master"
-=======
         "php": ">=5.4.0"
->>>>>>> origin/master
     },
     "minimum-stability": "dev"
 }
