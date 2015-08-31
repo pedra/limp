@@ -1,0 +1,16 @@
+/*
+
+     Your style here ...
+
+ */
+
+
+* {transition: 2s;}
+body {background: #445;}
+.off {opacity: 0;}
+.container {width: 400px; margin:20px auto 0 auto; padding: 10px 20px; border: 1px solid #DDD; background: #FFF; box-shadow: 0 10px 30px #001;}
+.footer {width: 400px; margin:5px auto; padding: 10px 20px; color:#890; text-align: right;}
+ul.menu {list-style: none; float: right;}
+ul.menu a {display:inline-block; text-decoration: none;}
+ul.menu li {display: inline-block; padding: 5px 10px; border-left: 1px solid #DDD;}
+ul.menu li:first-child {border-left: none;}
