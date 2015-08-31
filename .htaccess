@@ -1,6 +1,6 @@
 AddDefaultCharset utf-8
 AddCharset utf-8 .html .css .js .xml .json .rss .atom
-#AddType application/x-httpd-php phar
+AddType application/x-httpd-php phar
 FileETag INode MTime Size
 ServerSignature Off
 
