@@ -16,6 +16,7 @@ Required: [Composer](https://getcomposer.org/download/) & [Git](http://git-scm.c
 ## License
 
 This project is licensed under a Creative Commons.
+
 For more information, please see http://creativecommons.org/publicdomain/zero/1.0/
 
  
