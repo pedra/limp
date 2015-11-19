@@ -18,8 +18,7 @@
         "exclude": ["/doc", "/*.json", "/.git", "/*.md"]
     },
     "require": {
-        "php": ">=5.4.0",
-        "neos/limp": "0.1.*"
+        "php": ">=5.4.0"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.0",
