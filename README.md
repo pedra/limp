@@ -9,7 +9,7 @@
 
 Type in a terminal in the folder of your PHP project (Linux, Windows or Mac):
 
-    Composer create-project neos/limp ./ dev-master
+    composer create-project neos/limp ./ dev-master
 
 Required: [Composer](https://getcomposer.org/download/) & [Git](http://git-scm.com/book/en/Getting-Started-Installing-Git).
 
