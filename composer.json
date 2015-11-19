@@ -10,8 +10,8 @@
         "email": "prbr@ymail.com"
     }],
     "config": {
-        "vendor-dir": "php/vendor",
-        "bin-dir": "php/vendor/bin",
+        "vendor-dir": ".app/vendor",
+        "bin-dir": ".app/vendor/bin",
         "preferred-install": "dist"
     },
     "archive": {
