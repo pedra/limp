@@ -1,9 +1,9 @@
 {
-    "name": "neos/plim",
+    "name": "neos/limp",
     "type": "framework",
-    "description": "Minimal PHP starter.",
+    "description": "Minimal PHP starter - less is more in PHP",
     "keywords": ["framework", "starter", "simple"],
-    "homepage": "https://github.com/pedra/plim/wiki",
+    "homepage": "https://github.com/pedra/limp/wiki",
     "license": "CC0",
     "authors": [{
         "name": "Bill Rocha",
