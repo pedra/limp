@@ -34,7 +34,7 @@ Lib\Q::mount($config);
  TODO: Lib\Q::respond('get|POST|delete', 'regular_exp or literal or callback_function', 'controller', 'function');
 
 ¬¬¬¬¬¬¬¬¬¬¬¬¬
-*/
+
 
 //Teste (DELETE em produção)
 Lib\Q::respond('all','admin','Admin');
@@ -56,7 +56,7 @@ echo '<b>Is Calable:</b> '.is_callable(Lib\Q::$config['routers']['GET'][1]['rqst
 
 exit('<br>finished!');
 
-//*/
+*/
 
 //---------------------------------------END
 
