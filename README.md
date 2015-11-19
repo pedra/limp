@@ -1,6 +1,6 @@
 # Limp
 
-## Less is more with PHP. 
+## Less is more in PHP. 
 
 - The challenge of smaller project startup PH:P
 - using Composer to become great
