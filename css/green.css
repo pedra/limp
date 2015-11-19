@@ -1,0 +1,138 @@
+body {color:#021; font-weight: 100; background: #8A9; font-family: sans-serif;}
+b {font-weight: 800;}
+p {margin:15px 0;}
+h1 {display:block; margin:0;}
+h2 {font-size: 2.5em;}
+h3 {font-size: 1.3em;}
+h1, h2, h3, h4, h5, h6 {color:#021;}
+label{color:#130; padding:0; display:block; margin:10px 0 1px 2px; font-size: .9em;}
+label.switch {margin:0; padding: 0; font-style: italic; cursor: pointer;}
+table{width: auto;}
+th {font-weight: 100; color:#999;}
+
+blockquote {font-size: 1.5em; color:#995;}
+blockquote::before{content: '*'; font-size: 7em; float:left; color:#EEC; margin:-50px 0 -70px -50px;}
+img { width: 100%; float: left; margin: 10px 0;}
+
+.container { margin: 0; overflow: auto;}
+.footer {position: absolute; display:none;}
+
+input,
+button,
+select { padding: 10px 10px; font-size: 1.2em; margin:0 !important; vertical-align: top; background-image: linear-gradient(to top, #DEF, #FFF);}
+button { padding: 8px 14px; border:none; cursor: pointer;}
+button:hover,
+button:active,
+button.active {background-image: linear-gradient(to top, #8A9, #9BA);
+                color:#FFF; box-shadow: 0 0 8px #354;}
+input[type=checkbox] {width: 20px; vertical-align: middle;}
+
+.login {position:fixed; top:50%; left:50%; width:334px; margin:-150px 0 0 -170px; color:#000;}
+.login h1 b {position:absolute; margin:-10px 0 0 -90px; float: left; font-size: 1.5em; color:#ACB;
+             text-shadow: 0 0 2px #243, 5px 3px 20px #465;}
+.login h1 {padding-left: 80px; margin: 0 0 10px 0;color:#9BA; text-shadow: 2px 2px 5px #576; font-size: 5.7em;}
+.login input[type=text],
+.login input[type=password],
+.login button {display:inline-block; margin:4px 0 !important; height: 21px;
+                box-shadow: 0 2px 4px #576; border-radius:5px; border:1px solid #576;}
+.login button {margin:5px 0 0 8px !important; height: 42px;}
+.login #login,
+.login #password {width: 243px /*310px*/ ;}
+.login #go,
+.login #cadastro { width: 60px; padding: 5px 0;}
+
+.links {display:block;}
+.links span {display:block; padding:3px 0 0 5px; font-size: .95em;}
+.links img { width: 32px; margin:0 5px 0 0; border-radius:50%; box-shadow: 0 1px 1px #576; cursor:pointer;}
+.links img:hover,
+.links img:active { background-color: #FFF;}
+
+.help li {display:list-item; padding:1px 0; cursor: pointer; color:#354;}
+.help li:hover {text-decoration: underline;}
+
+
+/* MENU DE CONTROLE */
+.control { position:absolute; left:0; top:0; padding: 4px 0 2px 4px; z-index: 2000; background: rgba(0,0,0,.2);}
+.control button {display:inline-block; float:left; width: 50px; height: 45px; margin:0 4px 4px 0 !important; background:#CED url(../img/icons/msg.png) center 3px no-repeat; border:none; padding: 25px 0 0 0; font-size: .9em; transition: .5s;}
+.control button:hover,
+.control button:active {background-color:#243 !important; padding: 0; text-align: center;}
+
+#btfile {background-image: url(../img/icons/upload.png);}
+#btuser {background-image: url(../img/icons/users.png);}
+#btgroup {background-image: url(../img/icons/groups.png);}
+#btout {background-image: url(../img/icons/power.png);}
+#btconfig {background-image: url(../img/icons/gear.png);}
+
+/* PANELs */
+.painels { position: absolute; width: 400px; display:none; top:60px;
+            margin:0; padding: 5px !important; background: transparent; overflow: auto;}
+#groups, #users { bottom: 0; overflow-x: hidden;}
+#chat {right: 10px; width: auto;}
+
+/* SEND MESSAGEs */
+#message {position:fixed; bottom: 10px !important; height: 42px !important; width:350px; margin:5px 0 5px 5px; color:#000; font-family: sans-serif; z-index: 5000 !important; display:none; box-shadow: 0 5px 15px #132;}
+
+
+/* LISTAGEM DE GRUPOS E USUARIOS */
+.list h2 {margin:0; padding: 0 0 0 13px; width: 190px; position:absolute; top:0; font-size: 2em;}
+.list ul {margin:40px 0 0 -25px;}
+.list ul ul {margin:0;}
+.list li {display:block; font-weight: bold; width: 90%; padding: 4px 0 4px 20px; cursor:pointer; list-style: circle;}
+.list span { font-weight: 100; font-size: .8em;}
+.list .desc {display:block; color:#354;}
+.list .count {display:block; color:#021;}
+.list li:hover,
+.list li:active,
+.selected {background-color:#BDC; color:#000;}
+.list li:hover .count,
+.list li:active .count,
+.selected .count {color:#036 !important;}
+
+/* XHAT container */
+.xhat {min-width: 330px; position: fixed; top:0; left:0; bottom: 0; right: 0; overflow: auto; z-index: 0;}
+
+/* MESSAGEs in XHAT */
+.msg {clear: both; float:left; margin:5px 0; padding: 5px; box-shadow: 0 3px 7px #465;
+        background-image: linear-gradient(to bottom, #ACB, #ACB);
+        border-bottom-right-radius: 20px; border-top-left-radius: 22px; min-width: 40%; max-width: 90%;
+        transition: 1s;}
+.msg *{color:#222;  font-family:"Trebuchet MS",Optima,Arial,Helvetica,sans-serif;}
+.msg h2 {display:inline-block; font-size: 1em; margin:-2px 10px 0 0; padding:0; color:#000; font-weight: bold;}
+.msg img {width: 32px; float:left; margin: 0 5px 5px 1px; border-radius:50%;}
+.msg .msgtxt {color:#243; margin-left: 20px;}
+.msg .msgtxt img {width: 20px; display:inline;}
+.msg .msgdate {display:block; width: 40px; transform: rotate(-90deg); transform-origin: top; margin:20px -3px 0 0; float: right; font-size: .5em; color:#465; text-align: right;}
+
+.me {float:right; border-radius:0; border-bottom-left-radius: 20px; border-top-right-radius: 22px;}
+.me h2 {text-align: right;}
+.me img {float:right; margin: 0 1px 5px 10px;}
+.me .msgtxt {margin-left: 0; margin-right: 20px; text-align: right;}
+.me .msgdate {float: left; margin:20px 0 5px -20px;}
+
+.msg:hover,
+.msg:active,
+.me:hover,
+.me:active { box-shadow: 2px 6px 15px #465; background-image: linear-gradient(to bottom, #ACB, #DFE);}
+
+/* MEDIA QUERY */
+@media only screen and (max-width:400px){
+    .painels {width: 96%; min-width: 330px;}
+    #message { width: 300px;}
+}
+
+@media only screen and (min-width: 550px){
+    #groups, #users {margin-left: 0; width: 220px; position: fixed !important;}
+    #groups {display:block;}
+    #chat {display:block; left: 220px; right: 10px; width: auto;}
+    #message {left: 220px; right: 10px; bottom:0 !important; height: 80px !important;}
+}
+
+@media only screen and (min-width: 750px){
+    #groups {margin-left: 220px;}
+    #chat, #message {left: 450px;}
+    #btuser, #btgroup {display:none}
+}
+
+@media only screen and (min-width: 960px){
+    #chat, #message { width: 423px;}
+}

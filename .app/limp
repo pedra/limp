@@ -1,0 +1,76 @@
+<?php
+echo "\n  Remember: less is more!\n";
+if (php_sapi_name() !== 'cli') exit('It\'s no cli!');
+
+//Constants:
+define('ROOT', str_replace('\\', '/', dirname(__DIR__)).'/');
+define('TIMEON', microtime(true));
+
+//Command line settings...
+request($argv);
+
+
+exit("\n  Finished in ".number_format((microtime(true)-TIMEON)*1000,3)." ms.\n");
+
+
+// FUNCTIONS --------------------------------------------------------------------
+
+function request($rqst){
+    array_shift($rqst);
+    $ax = $rqst;
+    foreach($rqst as $a){
+        array_shift($ax);
+        if(strpos($a, '-h') !== false || strpos($a, '?') !== false) return _help();
+        if(strpos($a, 'optimize') !== false) return _optimize(substr($a, 8), $ax);
+        if(strpos($a, 'key:') !== false) return _key(substr($a, 4), $ax);
+        if(strpos($a, 'make:') !== false) return _make(substr($a, 5), $ax);
+    }
+    //or show help...
+    return _help();
+}
+
+function _key($v, $arg){
+    echo '  key: '.$v;
+
+    if(count($arg) > 0) {
+        echo "\n\n  Arguments:";
+        foreach ($arg as $a) {echo "\n\t$a";}
+    }
+
+    if($v == 'list'){
+        echo "\n\n  Ciphers:";
+        foreach (mcrypt_list_algorithms() as $x) {echo "\n\t".$x;}
+        echo "\n\n  Cipher Modes:";
+        foreach (mcrypt_list_modes() as $x) {echo "\n\t".$x;}
+    }
+    echo "\n";
+}
+
+
+function _make($v, $arg){
+    echo 'make: '.$v.print_r($arg, true);
+}
+
+function _optimize($v, $arg){
+    echo 'optimize: '.$v.print_r($arg, true);
+}
+
+
+
+//Help display
+function _help(){
+    echo '
+  Usage: php <path/to/.app/>limp [command:type] [options]
+
+  key:generate              Generate a new RSA key par
+  key:check                 Check is valid key par
+
+  make:controller <name>    Create a controller with indicated <name>
+  make:model <name>         Create a model with indicated <name>
+  make:library <name>       Create a library with indicated <name>
+
+  optimize                  Optimize entire Limp application
+
+  -h / ?                    Show this help
+  ';
+}

@@ -1,0 +1,23 @@
+{
+    "name": "neos/limp",
+    "type": "framework",
+    "description": "Minimal PHP starter - less is more in PHP",
+    "keywords": ["framework", "starter", "simple"],
+    "homepage": "https://github.com/pedra/limp/wiki",
+    "license": "CC0",
+    "authors": [{
+        "name": "Bill Rocha",
+        "email": "prbr@ymail.com"
+    }],
+    "config": {
+        "vendor-dir": "php/vendor",
+        "bin-dir": "php/vendor/bin"
+    },
+    "archive": {
+        "exclude": ["/doc", "/*.json", "/.git", "/*.md"]
+    },
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "minimum-stability": "dev"
+}

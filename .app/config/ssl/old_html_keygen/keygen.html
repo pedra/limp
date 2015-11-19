@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <script type="text/javascript" src="js/lib/forge.js"></script>
+    <link href="css/reset.css" rel="stylesheet"/>
+    <style>
+        div {padding: 10px; margin:10px; border:1px solid #DDD; word-break: break-all;}
+    </style>
+</head>
+
+<body>
+
+    <div id="private"></div>
+    <div id="public"></div>
+
+    <script type="text/javascript">
+
+function async() {
+  var bits = 512;
+  console.log('Generating ' + bits + '-bit key-pair...');
+  var st = +new Date();
+  forge.pki.rsa.generateKeyPair({
+    bits: bits,
+    workers: -1,
+    /*workLoad: 100,*/
+    workerScript: 'forge/prime.worker.js'
+  }, function(err, keypair) {
+    var et = +new Date();
+    console.log('Key-pair created in ' + (et - st) + 'ms.');
+    console.log('private', forge.pki.privateKeyToPem(keypair.privateKey));
+    console.log('public', forge.pki.publicKeyToPem(keypair.publicKey));
+  });
+}
+
+function sync() {
+  var bits = 512;
+  console.log('Generating ' + bits + '-bit key-pair...');
+  var st = +new Date();
+  var keypair = forge.pki.rsa.generateKeyPair(bits);
+  var et = +new Date();
+  console.log('Key-pair created in ' + (et - st) + 'ms.');
+  console.log('private', forge.pki.privateKeyToPem(keypair.privateKey));
+  console.log('public', forge.pki.publicKeyToPem(keypair.publicKey));
+}
+
+//async();
+//sync();
+
+var keys = forge.pki.rsa.generateKeyPair(2048);
+var private = forge.pki.privateKeyToPem(keys.privateKey);
+var public = forge.pki.publicKeyToPem(keys.publicKey);
+
+//Print
+_('private').innerHTML = private.replace('\r','').replace('-----BEGIN RSA PRIVATE KEY-----', '').replace('-----END RSA PRIVATE KEY-----', '');
+_('public').innerHTML = public.replace('\r','').replace('-----BEGIN PUBLIC KEY-----', '').replace('-----END PUBLIC KEY-----', '');
+
+
+
+function keygen() {
+      cat = 'KeyGen';
+      var bits = 512;
+      var keys = forge.pki.rsa.generateKeyPair(bits);
+      forge.log.debug(cat, 'generating ' + bits + '-bit RSA key-pair...');
+      setTimeout(function()
+      {
+         forge.log.debug(cat, 'private key:', keys.privateKey);
+         forge.log.debug(cat, forge.pki.privateKeyToPem(keys.privateKey));
+         forge.log.debug(cat, 'public key:', keys.publicKey);
+         forge.log.debug(cat, forge.pki.publicKeyToPem(keys.publicKey));
+
+         forge.log.debug(cat, 'testing sign/verify...');
+         setTimeout(function()
+         {
+            // do sign/verify test
+            try
+            {
+               var md = forge.md.sha1.create();
+               md.update('foo');
+               var signature = keys.privateKey.sign(md);
+               keys.publicKey.verify(md.digest().getBytes(), signature);
+               forge.log.debug(cat, 'sign/verify success');
+            }
+            catch(ex)
+            {
+               forge.log.error(cat, 'sign/verify failure', ex);
+            }
+         }, 0);
+      }, 0);
+   };
+
+//keygen();
+
+function _(e){return document.getElementById(e)}
+
+</script>
+
+</body>
+</html>
