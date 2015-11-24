@@ -1,0 +1,20 @@
+TODO:
+
+
+[importante] criar tipos de mensagens: FEITO - OK.
+
+msg     : mensagens
+file    : arquivos
+out     : derruba (opcionalmente envia uma mensagem tipo: "o servidor desligou sua conexão!", "sua chave foi removida")
+user    : alteração na listagem de usuários (alguém saiu ou entrou) - força o recarregamento da listagem de usuários.
+
+
+
+CRIAR painel de administração:
+    * Criação de grupos e gerenciamento;
+    * Associação de usuários a grupos;
+        ou a TODOS os grupos automaticamente
+    * Controle do RELAY;
+    * Relatórios de sistema (usuários logados, mensagens enviadas por grupo/usuário, etc.);
+
+

@@ -1,8 +1,7 @@
 <?php
 
 namespace Model;
-use Lib\Q;
-
+use Lib;
 
 class Zumbi {
 
@@ -10,7 +9,7 @@ class Zumbi {
 
         $this->deleteUser($id);
         //INSERT
-        Q::db()->query('INSERT INTO `users`
+        App::db()->query('INSERT INTO `users`
                     (`ID`, `NAME`, `SKEY`)
                     VALUES (:id, :name, :skey)',
                         [
@@ -18,20 +17,20 @@ class Zumbi {
                         ':name'=>$name,
                         ':skey'=>$skey
                         ]);
-        return Q::db()->result();
+        return App::db()->result();
 
     }
 
     function deleteUser($id){
-        Q::db()->query('DELETE FROM `users` WHERE ID = :id', [':id'=>$id]);
-        return Q::db()->result();
+        App::db()->query('DELETE FROM `users` WHERE ID = :id', [':id'=>$id]);
+        return App::db()->result();
     }
 
     //Pega os grupos habilitados para um determinado usuário
     function getUserGroupStatus($user){
 
-        Q::db()->query('SELECT * FROM view_group_by_user WHERE ID = :id', [':id'=>$user]);
-        $ret = Q::db()->result();
+        App::db()->query('SELECT * FROM view_group_by_user WHERE ID = :id', [':id'=>$user]);
+        $ret = App::db()->result();
         if($ret === false) return [];
 
         //formatando os dados ...
@@ -64,19 +63,19 @@ class Zumbi {
 
     //get user KEY
     function getUserKey($id){
-        Q::db()->query('SELECT SKEY FROM users WHERE ID=:id',[':id'=>$id]);
-        $rs = Q::db()->result();
+        App::db()->query('SELECT SKEY FROM users WHERE ID=:id',[':id'=>$id]);
+        $rs = App::db()->result();
         return isset($rs[0]->SKEY) ? $rs[0]->SKEY : false;
     }
 
     //get Messages from User in Group
     function msgByUserGroup($user, $group){
-        Q::db()->query('SELECT *
+        App::db()->query('SELECT *
                           FROM messages
                           WHERE TOGROUP = :grp
                           ORDER BY ID desc
                           LIMIT 10', [':grp'=>$group]);
-        $rs = Q::db()->result();
+        $rs = App::db()->result();
         if($rs === false) return false;
 
         krsort($rs); //invertendo a ordem do array (vem na ordem inversa para usar LIMIT)
@@ -93,7 +92,7 @@ class Zumbi {
         }
 
         //Atualizando o registro de mensagem
-        Q::db()->query('UPDATE user_group
+        App::db()->query('UPDATE user_group
                             SET LASTMSG = :lm
                             WHERE IDUSER = :user
                             AND   IDGROUP = :grp',
@@ -106,9 +105,9 @@ class Zumbi {
     //get connected userlist
     function getUserList(){
 
-        Q::db()->query('SELECT * FROM view_msg_from_users');
+        App::db()->query('SELECT * FROM view_msg_from_users');
 
-        $rs = Q::db()->result();
+        $rs = App::db()->result();
         if($rs === false) return false;
 
         $o = [];

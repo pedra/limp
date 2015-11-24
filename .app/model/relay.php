@@ -3,7 +3,6 @@
 namespace Model;
 use Lib;
 
-
 class Relay {
 
     private $db = null;

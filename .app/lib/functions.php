@@ -2,9 +2,9 @@
 //Check if file exists - return real path of file or false
 function _file_exists($file){
     if(file_exists($file)) return $file;
-    if(file_exists(ROOT.$file)) return ROOT.$file;
+    if(file_exists(WEB_PATH.$file)) return WEB_PATH.$file;
     if(file_exists(RPHAR.$file)) return RPHAR.$file;
-    $xfile = str_replace(ROOT, RPHAR, $file);
+    $xfile = str_replace(WEB_PATH, RPHAR, $file);
     if(file_exists($xfile)) return $xfile;
     return false;
 }
@@ -40,7 +40,7 @@ function download($reqst = '') {
     if($reqst == false) return false;
 
     //gerando header apropriado
-    include ROOT . '.php/config/mimetypes.php';
+    include WEB_PATH . '.php/config/mimetypes.php';
     $ext = end((explode('.', $reqst)));
     if (!isset($_mimes[$ext])) $mime = 'text/plain';
     else $mime = (is_array($_mimes[$ext])) ? $_mimes[$ext][0] : $_mimes[$ext];

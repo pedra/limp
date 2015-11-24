@@ -8,6 +8,8 @@
  * @package     Lib
  * @access      public
  * @since       0.0.4
+ * 
+ * ©NeosTag é marca registrada da NeosOrg e todos os direitos são reservados.
  */
 
 namespace Lib;
@@ -43,11 +45,11 @@ class Doc{
     function __construct($name = 'default', $cached = false){
         $this->name = $name;
         $this->cached = $cached;
-
-        $this->pathHtml = Q::html();
-        $this->pathHtmlCache = Q::html().'cache/';
-        $this->pathStyle = Q::style();
-        $this->pathScript = Q::script();
+        
+        $this->pathHtml = HTML_PATH;
+        $this->pathHtmlCache = HTML_PATH.'cache/';
+        $this->pathStyle = App::style();
+        $this->pathScript = App::script();
 
         $this->header = $this->pathHtml.'header.html';
         $this->body   = $this->pathHtml.'body.html';
@@ -88,8 +90,8 @@ class Doc{
         $this->content .= file_get_contents($this->body);
         $this->content .= file_get_contents($this->footer);
 
-        if(QMODE == 'dev') $this->assets();
-        if(QMODE == 'pro') {
+        if(APP_MODE == 'dev') $this->assets();
+        if(APP_MODE == 'pro') {
             $this->assetsComp();
             $this->setContent(str_replace(["\r","\n","\t",'  '], '', $this->getContent()));
         }
@@ -191,7 +193,7 @@ class Doc{
      *
      */
     function send() {
-        if(QMODE == 'pro'){
+        if(APP_MODE == 'pro'){
             ob_end_clean();
             ob_start('ob_gzhandler');
         }
@@ -262,7 +264,7 @@ class Doc{
         //With blade ???
         if($brade) $this->setContent($this->blade($this->getContent()));
 
-        //With ©sTag ???
+        //With ©NeosTag ???
         if($sTag) {
             $ponteiro = -1;
             $content = $this->getContent();
@@ -276,15 +278,14 @@ class Doc{
                 if($ret['-tipo-'] == 'var' && $ret['var'] == 'url') $vartemp = URL;
                 elseif (method_exists($this, '_' . $ret['-tipo-'])) $vartemp = $this->{'_' . $ret['-tipo-']}($ret);
 
-                //Incluindo o bloco gerado pelas ©sTags
+                //Incluindo o bloco gerado pelas ©NeosTags
                 $content = substr_replace($this->getContent(), $vartemp, $ret['-inicio-'], $ret['-tamanho-']);
                 $this->setContent($content);
 
                 //RE-setando o ponteiro depois de adicionar os dados acima
-                //$ponteiro = strlen($vartemp) + $ret['-inicio-'] -1;
                 $ponteiro = $ret['-inicio-'];
             }//end while
-        }//end ©sTag
+        }//end ©NeosTag
 
         //Eval PHP in HTML
         if($php) $this->evalPHP();
@@ -294,15 +295,14 @@ class Doc{
     }
 
     /**
-     * Scaner for ©sTag
-     * Scans the file to find a ©STAG - returns an array with the data found ©sTag
+     * Scaner for ©NeosTag
+     * Scans the file to find a ©NeosTag - returns an array with the data found ©NeosTag
      *
      * @param string $arquivo   file content
      * @param string $ponteiro  file pointer
-     * @param string $tag   ©sTag to scan
-     * @return array|false     array with the data found ©sTag or false (not ©sTag)
+     * @param string $tag       ©NeosTag to scan
+     * @return array|false      array with the data found ©NeosTag or false (not ©NeosTag)
     */
-
     private function sTag(&$arquivo, $ponteiro = -1, $tag = null){
         if($tag == null) $tag = $this->tag;
         $inicio = strpos($arquivo, '<'.$tag, $ponteiro + 1);
@@ -403,7 +403,7 @@ class Doc{
      * Insert variable data assigned in view
      * Parameter "tag" is the tag type indicator (ex.: <s:variable  . . . tag="span" />)
      *
-     * @param array $ret ©sTag data array
+     * @param array $ret ©NeosTag data array
      * @return string   Renderized Html
     */
     private function _var($ret) {
@@ -421,7 +421,7 @@ class Doc{
      * _list :: Create ul html tag
      * Parameter "tag" is the list type indicator (ex.: <s:_list  . . . tag="li" />)
      *
-     * @param array $ret ©sTag data array
+     * @param array $ret ©NeosTag data array
      * @return string|html
     */
     private function _list($ret){
@@ -449,7 +449,7 @@ class Doc{
      * _block :: insert content block
      * Parameter "name" is the name of block;
      *
-     * @param array $ret ©sTag data array
+     * @param array $ret ©NeosTag data array
      * @return string|html
     */
     private function _block($ret){

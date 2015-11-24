@@ -32,6 +32,12 @@
     $can->encode(50000) => "ntW"
     $can->decode("ntW") => 50000
 
+    Depende do arquivo com a chave aleatória (gerada na instalação da aplicação)
+    define('CONFIG_PATH', 'path/to/config/file/');
+
+    Use "limp" para gerar uma chave aleatória:
+    >> php limp key:generate [enter]
+
 */
 
 namespace Lib;
@@ -41,20 +47,38 @@ class Can{
     private $number = 0;
     private $can = '';
     private $resolution = 10;
+    private $useExtra = false;
 
 
     private $base = ['I','u','h','5','B','A','r','i','7','9','z','d','n','t','F','2','W','X','f','e','x','v','_','8','m','T','N','R','L','c','6','P','k','Q','q','j','Y','M','4','S','G','o','0','$','K','s','g','H','E','b','a','J','U','Z','l','1','O','3','y','p','V','D','C','w'];
-    //private $base = ['_','$','0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
 
-    //private $extra_base = ['$','!','#','%','&','*','+','-','?','@','(',')','/','\\','[',']','_','0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+    private $extra_base = ['$','!','#','%','&','*','+','-','?','@','(',')','/','\\','[',']','_','0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
 
     /*
      *
      */
 
-    function __construct($resolution = 10){
-        if((0 + $resolution) > 0)
+    function __construct($resolution = 10, $extra = false){
+        if((0 + $resolution) > 0){
             $this->resolution = 0 + $resolution;
+        }
+
+        if($extra) $this->useExtra = true;
+
+        //get "base" key OR use default
+        if(file_exists(CONFIG_PATH.'can.key')){
+            $base = file_get_contents(CONFIG_PATH.'can.key');
+            $this->base = [];
+            $this->extra_base = [];
+            $base = explode("\n", $base);
+
+            for($i = 0; $i < strlen($base[0]); $i ++){
+                $this->base[] = $base[0][$i];
+            }
+            for($i = 0; $i < strlen($base[1]); $i ++){
+                $this->extra_base[] = $base[1][$i];
+            }
+        }
     }
 
     /* Codifica um valor numérico em CAN ( ex.: 63.145 > GQT )
@@ -76,14 +100,14 @@ class Can{
 
         for($i = $this->resolution; $i >= 1; $i--){
             if($num <= 0) {
-                $res .= $this->base[0];
+                $res .= $this->useExtra ? $this->extra_base[0] : $this->base[0];
                 continue;
             }
             $ind = bcpow(64, $i-1);
             $a = intval($num/$ind);
             if($a > 0) $himem = true;
             $num = $num - ($a*$ind);
-            if($himem || $forceWidth) $res .= $this->base[$a];
+            if($himem || $forceWidth) $res .= $this->useExtra ? $this->extra_base[$a] : $this->base[$a];
         }
         $this->can = $res;
         return $this->can;
@@ -98,7 +122,7 @@ class Can{
         for($i = $len; $i >= 0; $i--){
             $peso = bcpow(64, $i);
             $d = substr($this->can, $len-$i, 1);
-            $c = array_search($d, $this->base);
+            $c = array_search($d, $this->useExtra ? $this->extra_base : $this->base);
 
             if($c === false) return false;
             $valor += $peso * $c;

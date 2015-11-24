@@ -4,10 +4,10 @@
 echo '<style>body{font-family:Sans-serif;color:#900;font-size:.9em;max-width:500px;margin:10% auto 30% auto; padding:20px;border-radius:15px;border:1px solid #890;box-shadow:0 10px 20px #999}h1{font-size:5em;margin:0 0 10px 0}</style>';
 
 // Constants
-define('ROOT', str_replace('\\', '/', strpos(__DIR__, 'phar://') !== false
+define('WEB_PATH', str_replace('\\', '/', strpos(__DIR__, 'phar://') !== false
                     ? dirname(str_replace('phar://', '', __DIR__)).'/'
                     : __DIR__.'/'));
-define('RPHAR', (strpos(ROOT, 'phar://') !== false) ? ROOT : false);
+define('RPHAR', (strpos(WEB_PATH, 'phar://') !== false) ? WEB_PATH : false);
 define('URL', $url = 'http://'.$_SERVER['HTTP_HOST'].str_replace(basename(__FILE__), '',$_SERVER['REQUEST_URI']));
 
 
@@ -20,7 +20,7 @@ date_default_timezone_set('America/Sao_Paulo');
 set_exception_handler('exception');
 
 //Include DB
-include ROOT.'.app/lib/db.php';
+include APP_PATH.'lib/db.php';
 
 // Data base configuration
 $db = new Lib\Db([
@@ -30,7 +30,7 @@ $db = new Lib\Db([
                 ]);
 
 //Runing ...
-$r = $db->query(file_get_contents(ROOT.'.app/config/install.sql'));
+$r = $db->query(file_get_contents(CONFIG_PATH.'install.sql'));
 
 //Success:
 exit('<h1>Sucesso!</h1><p>Instalação terminada!!</p><p>Agora, exclua o arquivo de instalação <i>('.__FILE__.')</i><br>antes de acessar o site (<a href="'.URL.'">'.URL.'</a>)</p>');
