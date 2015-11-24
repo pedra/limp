@@ -1,10 +1,13 @@
-# Limp [![Build Status](https://travis-ci.org/pedra/limp.svg)](https://travis-ci.org/pedra/limp)
+# Limp 
+
+[![Build Status](https://travis-ci.org/pedra/limp.svg)](https://travis-ci.org/pedra/limp)
 
 ## Less is more in PHP. 
 
 
 - The challenge of smaller project startup PH:P
 - using Composer to become great
+
 
 ## Install
 
