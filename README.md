@@ -1,6 +1,7 @@
 # Limp 
 
 [![Build Status](https://travis-ci.org/pedra/limp.svg)](https://travis-ci.org/pedra/limp)
+[![Latest Stable Version](https://poser.pugx.org/neos/limp/v/stable)](https://packagist.org/packages/neos/limp) [![Total Downloads](https://poser.pugx.org/neos/limp/downloads)](https://packagist.org/packages/neos/limp) [![Latest Unstable Version](https://poser.pugx.org/neos/limp/v/unstable)](https://packagist.org/packages/neos/limp) [![License](https://poser.pugx.org/neos/limp/license)](https://packagist.org/packages/neos/limp)
 
 ## Less is more in PHP. 
 
