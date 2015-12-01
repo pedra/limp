@@ -8,7 +8,7 @@
  * @package     Lib
  * @access      public
  * @since       0.0.4
- * 
+ *
  * ©NeosTag é marca registrada da NeosOrg e todos os direitos são reservados.
  */
 
@@ -32,7 +32,7 @@ class Doc{
     private $scripts =          [];
     private $forceCompress =    false;
 
-    private $values =           [];
+    static private $values =    [];
     private $jsvalues =         [];
     private $block =            [];
     private $content =          '';
@@ -45,7 +45,7 @@ class Doc{
     function __construct($name = 'default', $cached = false){
         $this->name = $name;
         $this->cached = $cached;
-        
+
         $this->pathHtml = HTML_PATH;
         $this->pathHtmlCache = HTML_PATH.'cache/';
         $this->pathStyle = App::style();
@@ -201,7 +201,12 @@ class Doc{
         header('Cache-Control: must_revalidate, public, max-age=31536000');
         header('X-Server: Qzumba/0.1.8.beta');//for safety ...
         header('X-Powered-By: NEOS PHP FRAMEWORK/1.3.0');//for safety ...
-        exit($this->content);
+        return $this->sendWithCach();
+
+        /*
+         * @todo "sendWithCache" habilitado - observe!
+         */
+        //exit($this->content);
     }
 
     /* Send cached version of compilation
@@ -217,6 +222,21 @@ class Doc{
         $this->send();
     }
 
+    /** Teste
+     * @todo testando send with CACHE in PHP!
+     */
+    function sendWithCach()
+    {
+        //if(APP_MODE == 'pro'){
+        //    ob_end_clean();
+        //    ob_start('ob_gzhandler');
+        //}
+        $cache = $this->pathHtmlCache.$this->name.'_cache.html';
+        if(!file_exists($cache)) file_put_contents($cache, $this->content);
+        include $cache;
+        exit();
+    }
+
     //Insere o conteúdo processado Html
     protected function setContent($content) {
         $this->content = $content;
@@ -230,7 +250,11 @@ class Doc{
 
     //Pega uma variável ou todas
     protected function getVar($var = null) {
-        return ($var == null) ? $this->values : (isset($this->values[$var]) ? $this->values[$var] : false);
+        //return ($var == null) ? $this->values : (isset($this->values[$var]) ? $this->values[$var] : false);
+        return ($var == null) ? static::$values : (isset(static::$values[$var]) ? static::$values[$var] : false);
+    }
+    protected static function get($var = null){
+        return ($var == null) ? static::$values : (isset(static::$values[$var]) ? static::$values[$var] : false);
     }
 
     //Pega o conteúdo de um block
@@ -241,8 +265,11 @@ class Doc{
     //Registra uma variável para o Layout
     function value($name, $value = null) { return $this->val($name, $value = null);}
     function val($name, $value = null) {
-        if(is_string($name)) $this->values[$name] = $value;
-        if(is_array($name)) $this->values = array_merge($this->values, $name);
+        //if(is_string($name)) $this->values[$name] = $value;
+        //if(is_array($name)) $this->values = array_merge($this->values, $name);
+
+        if(is_string($name)) static::$values[$name] = $value;
+        if(is_array($name)) static::$values = array_merge(static::$values, $name);
         return $this;
     }
 
@@ -409,7 +436,8 @@ class Doc{
     private function _var($ret) {
         $v = $this->getVar(trim($ret['var']));
         if(!$v) return '';
-        $ret['-content-'] .= $v;
+        //$ret['-content-'] .= $v;
+        $ret['-content-'] .= '<?php echo Lib\Doc::get("'.trim($ret['var']).'")?>';
 
         //List type
         if(is_array($v)) return $this->_list($ret);

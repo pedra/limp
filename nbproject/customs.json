@@ -1,0 +1,18 @@
+{
+    "elements": {
+        "x::menu":{},
+        "x::module": {},
+        "x:style": {},
+        "x:htitle": {},
+        "x:script": {},
+        "x:url": {},
+        "x:error": {}
+    },
+    "attributes": {
+        "name": {},
+        "type": {},
+        "tag": {},
+        "class": {},
+        "id": {}
+    }
+}

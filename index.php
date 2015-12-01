@@ -13,7 +13,7 @@
  */
 
 //Configurations
-include __DIR__ . '/.app/config/start_dev.php';
+include __DIR__ . '/.app/config/start.php';
 include CONFIG_PATH . 'router.php';
 include CONFIG_PATH . 'database.php';
 
