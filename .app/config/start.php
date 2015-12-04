@@ -36,5 +36,5 @@ spl_autoload_register(function($class) {
 include APP_PATH.'vendor/autoload.php';
 
 // Mount the "App" static dock
-class_alias('\\Lib\App', 'App');
-class_alias('\\Lib\App', 'dock');
+class_alias('Lib\App', 'App');
+class_alias('Lib\App', 'dock');

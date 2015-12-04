@@ -1,5 +1,5 @@
 <?php
-echo "\n  Remember: less is more!\n";
+echo 'Always remember: less is more in PHP!';
 if (php_sapi_name() !== 'cli') exit('It\'s no cli!');
 
 include dirname(dirname(__DIR__)).'/config/start.php';
@@ -70,7 +70,6 @@ function _key($v, $arg){
     else return "\n\n  ----- ERROR: Command 'key:$v' not found!\n"._help();
 }
 
-
 function _make($v, $arg){
     echo '  make: '.$v;
 
@@ -122,7 +121,6 @@ function _make($v, $arg){
 function _optimize($v, $arg){
     echo "\n  >> Optimized - success!\n";
 }
-
 
 // Checa um diretório e cria se não existe - retorna false se não conseguir ou não existir
 function checkAndOrCreateDir($dir, $create = false, $perm = '0777'){
