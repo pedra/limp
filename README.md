@@ -27,7 +27,7 @@ For more information, please see http://creativecommons.org/publicdomain/zero/1.
 ## Contacts
 Phone: (+55 21) 2633-2156
 
-Test site: http://172.93.111.86/limp/
+Test site: http://limphp.tk
 
  
 
