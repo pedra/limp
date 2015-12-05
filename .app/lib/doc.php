@@ -39,7 +39,8 @@ class Doc{
     private $tag =              'x:';
 
 
-    /* Construct
+    /* Construct of Doc
+     *
      *
      */
     function __construct($name = 'default', $cached = false){
